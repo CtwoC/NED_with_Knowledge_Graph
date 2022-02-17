@@ -1,7 +1,7 @@
 #%%
 from dbpedia_query_service import DBpediaQueryService 
 
-
+# Download from http://kgvec2go.org/download.html
 service = DBpediaQueryService(vector_file="/Users/chenzichu/Desktop/NED_with_Knowledge_Graph/model.kv")
 
 # Some using case of knowledge graph
@@ -45,13 +45,14 @@ def disambiguation(entities, limit = True):
     return best_result
 
 #%%
+import math
 # Greedy: get local maximum
 def greedy1(entities, early_stop = 0.3):
     q = [[0] * len(entities)]
-    score = early_stop * len(entities)
+    score = early_stop * math.comb(len(entities), 2)
 
     # Get the score of a list of entities
-    # Query 2^len(es) times
+    # Query comb(len(entities), 2) times
     def __score(es):
         s = 0
         for g in list(itertools.combinations(es,2)):
@@ -108,6 +109,9 @@ def greedy2(entities, early_stop = 0.3):
 entities = [['Floyd Lowa', 'Pink Floyd'],['The Rock','Rock Music'],['Berlin Wall','The Wall']]
 
 disambiguation(entities)
+
+[0,0,0]
+
 
     
 #%%
