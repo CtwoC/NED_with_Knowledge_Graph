@@ -84,7 +84,7 @@ def greedy1(entities, early_stop = 0.3):
 #%%
 def greedy2(entities, early_stop = 0.3):
     d = dict()
-    score = early_stop * len(entities)
+    score = early_stop * math.comb(len(entities), 2)
 
     for combination in itertools.product(*entities):
         d[combination] = 0
